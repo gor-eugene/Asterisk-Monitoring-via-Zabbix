@@ -6,7 +6,9 @@ the whole idea is to have Zabbix screen containing vital Asterisk information.
 Description
 
 template_app_asterisk_service.xml - Template file for Zabbix
+
 screen_app_asterisk_service.xml - Screen template userparams_app_asterisk_service.conf - userparams.conf file, to be included in Zabbix configuration
+
 sip_status.sh - Bash script to be placed and run periodically on monitored Asterisk server, generates (more or less) pretty report, consistent with zabbix screen
 
 Usage
