@@ -1,1 +1,0 @@
-Asterisk Monitoring via Zabbix
