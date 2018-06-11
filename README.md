@@ -5,23 +5,23 @@ the whole idea is to have Zabbix screen containing vital Asterisk information.
 
 Description
 
-template_app_asterisk_service.xml - Template file for Zabbix
+* template_app_asterisk_service.xml - Template file for Zabbix
 
-screen_app_asterisk_service.xml - Screen template 
+* screen_app_asterisk_service.xml - Screen template 
 
-userparams_app_asterisk_service.conf - userparams.conf file, to be included in Zabbix configuration
+* userparams_app_asterisk_service.conf - userparams.conf file, to be included in Zabbix configuration
 
-sip_status.sh - Bash script to be placed and run periodically on monitored Asterisk server, generates (more or less) pretty report, consistent with zabbix screen
+* sip_status.sh - Bash script to be placed and run periodically on monitored Asterisk server, generates (more or less) pretty report, consistent with zabbix screen
 
 Usage
 
-Import template_app_asterisk_service.xml into zabbix;
+* Import template_app_asterisk_service.xml into zabbix;
 
-Create new host in zabbix, assign to newly imported template;
+* Create new host in zabbix, assign to newly imported template;
 
-Change {HOST.ADDRESS} to newly added host ip address, and {HOST.NAME} to Zabbix host name in screen_app_asterisk_service.xml, import that file in Zabbix;
+* Change {HOST.ADDRESS} to newly added host ip address, and {HOST.NAME} to Zabbix host name in screen_app_asterisk_service.xml, import that file in Zabbix;
 
-Include userparams_app_asterisk_service.conf in Zabbix configuration;
+* Include userparams_app_asterisk_service.conf in Zabbix configuration;
 
-Copy sip_status.sh script to server you want to monitor, make sure it is executed periodically via cron.
+* Copy sip_status.sh script to server you want to monitor, make sure it is executed periodically via cron.
 
