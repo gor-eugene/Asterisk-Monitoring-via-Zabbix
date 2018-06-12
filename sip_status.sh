@@ -4,7 +4,7 @@
 
 HTMLFILE='/var/www/html/sipstatus.html'
 FONT="<font color=black face='verdana, arial, helvetica, sans-serif' size='2' />"
-/bin/echo "<html><body><table>" > $HTMLFILE
+/bin/echo "<html><body><table>" >> $HTMLFILE
 
 # place that wherever you want
 
@@ -33,7 +33,7 @@ done
 /usr/sbin/asterisk -rx "dongle show devices" | \
 /bin/grep "Not\|not" | \
 /bin/gawk '{print $1,$3,$4}' | \
-while LINE = read -r line; do
+while LINE= read -r line; do
         GSMNUM=`/bin/echo $line | /bin/gawk '{print $1}'`
         GSMSTATE=`/bin/echo $line | /bin/gawk '{if ($2 = "Not connec") print ("GSM " $1 " not connected"); else print "All GSM is work"}'`
         if [ $GSMSTATE != 'All GSM is work']; then
@@ -51,7 +51,7 @@ done
 /usr/sbin/asterisk -rx "sip show registry" | \
 /bin/grep -v 'registrations\|Reg.Time' | \
 /bin/gawk 'END{print NR}' | \
-while LINE = read -r line; do
+while LINE= read -r line; do
         TNOT=`/bin/echo $line | /bin/gawk '{print "Total numbers of trnks: ", $1}'`
         if [ $TNOT == 0 ]; then 
                 COLOR='#FFBBBB'
@@ -69,7 +69,7 @@ done
 /bin/grep -v "Reg.Time" | \
 /bin/grep 'Registered' | \
 /bin/gawk 'END{print NR}' | \
-while LINE = read -r line; do
+while LINE= read -r line; do
         NORT=`/bin/echo $line | /bin/gawk '{print "Total numbers of registered trunks: ", $1}'`
         if [ $NORT == 0 ]; then 
                 COLOR='#FFBBBB'
@@ -87,7 +87,7 @@ done
 /bin/grep -v "Reg.Time" | \
 /bin/grep -v 'Registered' | \
 /bin/gawk '{print $1, $3, $5" "$6}' | \
-while LINE = read -r line; do
+while LINE= read -r line; do
         HOST=`/bin/echo $line | /bin/gawk '{print $1}'`
         USERNAME=`/bin/echo $line | /bin/gawk '{print $2}'`
         STATE=`/bin/echo $line | /bin/gawk '{print $3" "$4}'`
@@ -108,7 +108,7 @@ done
 /usr/sbin/asterisk -rvvvvvx 'core show channels' | \
 /bin/grep --text -i 'active call' | \
 /bin/cut -d ' ' -f1 | \
-while LINE = read -r line; do
+while LINE= read -r line; do
         NOAC=`/bin/echo $line | /bin/gawk '{print $1}'`
         NOACA=`/bin/echo $line | /bin/gawk '{if ($1 > 0) print ("We have some active calls: ", $NOAC, " total"); else print "Something went wrong, no active calls!"}'`
         if [ $NOAC == 0 ]; then
@@ -125,7 +125,7 @@ done
 /usr/sbin/asterisk -rx "core show uptime seconds" | \
 /bin/grep --text -i "System uptime:" | \
 /bin/gawk '{print $3}' | \
-while LINE = read -r line; do
+while LINE= read -r line; do
         UPTIMES=`/bin/echo $line | /bin/gawk '{print $1}'`
         TUPTIMES=`/bin/echo $line | /bin/gawk '{if ($1 == 0) print ("Something went wrong, system uptime = ", $UPTIMES, " seconds"); else print ("All good, system uptime = ", $UPTIMES, "seconds")}'`
         if [ $UPTIMES == 0  ]; then
